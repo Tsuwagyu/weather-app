@@ -1,16 +1,20 @@
-async function weatherFetch(location, date1, date2) {
+async function weatherFetch(location) {
 
     try {
 
-        const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date1}/${date2}?key=8AAVWB7V3JELBLHF38KT3VGLC`);
+        const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC`);
         const result = await response.json();
+        let weatherInfoDiv = document.querySelector('.weather-results');
 
 
         let finalData = necessaryResults(result);
         console.log(finalData);
 
 
-    } catch(error) {
+
+        
+
+    } catch(error) {    
         console.error('there was a problem', error);
     }
 
@@ -23,6 +27,7 @@ function searchLocale() {
     locationSearchRef.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             console.log('this is working');
+            weatherFetch(locationSearchRef.value);
         }
     })
 }
@@ -45,3 +50,5 @@ function necessaryResults(result) {
 
     };
 }
+
+searchLocale();
