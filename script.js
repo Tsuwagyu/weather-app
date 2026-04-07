@@ -14,6 +14,11 @@ async function weatherFetch(location) {
     try {
 
         const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC&unitGroup=${currentUnits}`);
+        if (!response.ok) {
+            if(response.status === 400) {
+                throw new Error ('please type your location of choice correctly');
+            }
+        }
         const result = await response.json();
         let resultsRef = document.querySelector('.weather-results');
 
@@ -62,6 +67,7 @@ async function weatherFetch(location) {
 
 
 
+
         
 
     } catch(error) {    
@@ -77,7 +83,6 @@ function searchLocale() {
 
     formRef.addEventListener('submit', (e) => {
         e.preventDefault();
-        console.log('this is working');
         weatherFetch(locationSearchRef.value);
         lastSearched = locationSearchRef.value;
         
