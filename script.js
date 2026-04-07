@@ -5,6 +5,14 @@ async function weatherFetch(location) {
         const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC`);
         const result = await response.json();
         let resultsRef = document.querySelector('.weather-results');
+        const units = {
+            temperature: '°F',
+            feel: '°F',
+            precipitation: ' in',
+            uvIndex: '',
+            windsp: ' mph',
+            windgus: ' mph',
+        };
 
 
         let finalData = necessaryResults(result);
@@ -24,7 +32,7 @@ async function weatherFetch(location) {
                 }
                 
             } else {
-                p.textContent = `${key}: ${value}`;
+                p.textContent = `${key}: ${value}${units[key] || ''}}`;
             }
             p.classList.add(`weather-${key}`);
             resultsRef.append(p);
@@ -68,7 +76,7 @@ function necessaryResults(result) {
         Sunrise: result.currentConditions.sunrise,
         Sunset: result.currentConditions.sunset, 
         Windspeeds: result.currentConditions.windspeed,
-        Windgusts: result.currentConditions.windgust,
+        Windgust: result.currentConditions.windgust,
                 
 
     };
