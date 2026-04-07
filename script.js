@@ -6,12 +6,12 @@ async function weatherFetch(location) {
         const result = await response.json();
         let resultsRef = document.querySelector('.weather-results');
         const units = {
-            temperature: '°F',
-            feel: '°F',
-            precipitation: ' in',
-            uvIndex: '',
-            windsp: ' mph',
-            windgus: ' mph',
+            Temperature: '°F',
+            Feel: '°F',
+            Precipitation: ' in',
+            UV: '',
+            Windspeed: ' mph',
+            Windgust: ' mph',
         };
 
 
@@ -32,7 +32,7 @@ async function weatherFetch(location) {
                 }
                 
             } else {
-                p.textContent = `${key}: ${value}${units[key] || ''}}`;
+                p.textContent = `${key}: ${value}${units[key] || ''}`;
             }
             p.classList.add(`weather-${key}`);
             resultsRef.append(p);
@@ -75,7 +75,7 @@ function necessaryResults(result) {
         UV: result.currentConditions.uvindex,
         Sunrise: result.currentConditions.sunrise,
         Sunset: result.currentConditions.sunset, 
-        Windspeeds: result.currentConditions.windspeed,
+        Windspeed: result.currentConditions.windspeed,
         Windgust: result.currentConditions.windgust,
                 
 
