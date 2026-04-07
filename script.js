@@ -1,18 +1,38 @@
+let currentUnits = 'us';
+let lastSearched = '';
+
+function toggleUnit() {
+    let toggleBtn = document.getElementById("toggleWeather");
+
+    toggleBtn.addEventListener('click', () => {
+        currentUnits = currentUnits === 'us' ? 'metric' : 'us';
+        weatherFetch(lastSearched);
+    })
+}
 async function weatherFetch(location) {
 
     try {
 
-        const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC`);
+        const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC&unitGroup=${currentUnits}`);
         const result = await response.json();
         let resultsRef = document.querySelector('.weather-results');
-        const units = {
+
+        const unitsImperial = {
             Temperature: '°F',
             Feel: '°F',
             Precipitation: ' in',
-            UV: '',
             Windspeed: ' mph',
             Windgust: ' mph',
         };
+
+        const unitsMetric = {
+            Temperature: ' °C',
+            Feel: ' °C',
+            Precipitation: ' mm',
+            Windspeed: ' kph',
+            Windgust: ' kph'
+            
+        }
 
 
         let finalData = necessaryResults(result);
@@ -21,7 +41,7 @@ async function weatherFetch(location) {
         resultsRef.innerHTML = ``;
 
         Object.entries(finalData).forEach(([key, value]) => {
-
+            const units = currentUnits === 'us' ? unitsImperial : unitsMetric;
             const p = document.createElement('p');
 
             if(Array.isArray(value)) {
@@ -59,6 +79,7 @@ function searchLocale() {
         e.preventDefault();
         console.log('this is working');
         weatherFetch(locationSearchRef.value);
+        lastSearched = locationSearchRef.value;
         
     })
 }
@@ -83,3 +104,4 @@ function necessaryResults(result) {
 }
 
 searchLocale();
+toggleUnit();
