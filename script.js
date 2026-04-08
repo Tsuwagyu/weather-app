@@ -86,7 +86,6 @@ async function weatherFetch(location) {
 
     } catch(error) {    
         console.error('there was a problem', error);
-        let resultsRef = document.querySelector('.weather-results');
         resultsRef.innerHTML = '';
         resultsRef.textContent = error.message;
     }
