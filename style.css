@@ -85,6 +85,13 @@ h1, h2, h3, h4, h5, h6 {
     
 }
 
+.weather-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 .weather-results:empty {
     display: none;
 }
@@ -92,11 +99,34 @@ h1, h2, h3, h4, h5, h6 {
 .weather-Conditions {
     font-size: 1rem;
     color: var(--accent);
-    margin-bottom: 1rem;
 }
 
 .weather-Temperature {
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+}
+
+.weather-Location {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--accent);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.90;
+}
+
+#location-search {
+    padding: 8px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background-color: white;
 }
