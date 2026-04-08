@@ -75,3 +75,28 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+.weather-results {
+   background-color: var(--card-bg);
+   padding: 24px 32px;
+   border-radius: 8px;
+   margin-top: 24px;
+   min-width: 300px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    
+}
+
+.weather-results:empty {
+    display: none;
+}
+
+.weather-Conditions {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.weather-Temperature {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
