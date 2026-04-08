@@ -12,6 +12,20 @@ function toggleUnit() {
 async function weatherFetch(location) {
 
     try {
+        
+        let resultsRef = document.querySelector('.weather-results');
+
+        resultsRef.innerHTML = ``;
+
+        const loader = document.createElement('div');
+        loader.textContent = "Awaiting response...";
+
+        loader.classList.add("loadStuff");
+
+        resultsRef.appendChild(loader);
+
+        
+
 
         const response = await fetch (`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=8AAVWB7V3JELBLHF38KT3VGLC&unitGroup=${currentUnits}`);
         if (!response.ok) {
@@ -20,7 +34,7 @@ async function weatherFetch(location) {
             }
         }
         const result = await response.json();
-        let resultsRef = document.querySelector('.weather-results');
+
 
         const unitsImperial = {
             Temperature: '°F',
@@ -72,6 +86,9 @@ async function weatherFetch(location) {
 
     } catch(error) {    
         console.error('there was a problem', error);
+        let resultsRef = document.querySelector('.weather-results');
+        resultsRef.innerHTML = '';
+        resultsRef.textContent = error.message;
     }
 
 
@@ -83,10 +100,14 @@ function searchLocale() {
 
     formRef.addEventListener('submit', (e) => {
         e.preventDefault();
-        weatherFetch(locationSearchRef.value);
-        lastSearched = locationSearchRef.value;
+        if (locationSearchRef.value.trim() !== "") {
+            weatherFetch(locationSearchRef.value);
+            lastSearched = locationSearchRef.value;
+        } else {
+            alert("A location must be specified");
+        }
         
-    })
+    });
 }
 
 function necessaryResults(result) {
