@@ -1,5 +1,6 @@
 let currentUnits = 'us';
 let lastSearched = '';
+let resultsRef = document.querySelector('.weather-results');
 
 function toggleUnit() {
     let toggleBtn = document.getElementById("toggleWeather");
@@ -13,7 +14,6 @@ async function weatherFetch(location) {
 
     try {
         
-        let resultsRef = document.querySelector('.weather-results');
 
         resultsRef.innerHTML = ``;
 
@@ -108,6 +108,12 @@ function searchLocale() {
         }
         
     });
+
+    locationSearchRef.addEventListener('search', () => {
+        if (locationSearchRef.value === '') {
+            resultsRef.innerHTML = '';
+        }
+    })
 }
 
 function necessaryResults(result) {
